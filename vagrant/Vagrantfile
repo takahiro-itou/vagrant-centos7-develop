@@ -28,6 +28,11 @@ Vagrant.configure("2") do |config|
   config.vm.provision("file",
                       source: "../data/",
                       destination: "/tmp/")
+
+    config.vm.provision("file",
+                        source: "~/VagrantConfig/",
+                        destination: "/tmp/")
+
   config.vm.provision("root", type: "shell",
                       path: "provision.root.sh",
                       privileged: true)
