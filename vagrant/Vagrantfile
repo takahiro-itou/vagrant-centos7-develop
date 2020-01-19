@@ -1,0 +1,33 @@
+##  -*-  coding: utf-8; mode: ruby -*-  ##
+##  vi: set ft=ruby
+
+load  File.expand_path("DetectOS.rb")  if File.exists?("DetectOS.rb")
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "takahiro-itou/centos7-develop"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name   = "vagrant-centos7-develop"
+    v.memory = "2048"
+
+    v.gui    = false
+    v.customize [
+      "modifyvm",           :id,
+      "--cableconnected1",  "on",
+      "--hwvirtex",         "on",
+      "--nestedpaging",     "on",
+      "--largepages",       "on",
+      "--ioapic",           "on",
+      "--pae",              "on",
+      "--paravirtprovider", "kvm",
+    ]
+  end
+
+  config.vm.boot_timeout = 300
+
+  config.vm.provision("root", type: "shell",
+                      path: "provision.root.sh",
+                      privileged: true)
+  config.vm.synced_folder(".", "/vagrant", disabled: true)
+
+end
