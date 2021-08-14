@@ -6,6 +6,9 @@ echo  Provisioning $HOSTNAME
 
 sudo  timedatectl  set-timezone Asia/Tokyo
 
+sudo  yum  install -y  \
+    screen
+
 # RamDisk
 sudo  mkdir        /ramdisk
 sudo  chmod  1777  /ramdisk
