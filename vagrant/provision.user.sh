@@ -15,4 +15,13 @@ if  test -d ${HOME}/.ssh ; then
     chmod  700  ${HOME}/.ssh
 fi
 
+# CPPUNIT
+mkdir  /tmp/build
+pushd  /tmp/build
+tar    -xzvf  /tmp/data/cppunit-1.15.1.tar.gz
+cd     cppunit-1.15.1/
+./configure  --prefix=/tools/cppunit/1.15.1  \
+    &&  make  &&  make  install
+popd
+
 date  >  ${HOME}/.provision.user
