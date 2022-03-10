@@ -24,4 +24,12 @@ cd     cppunit-1.15.1/
     &&  make  &&  make  install
 popd
 
+# CMAKE
+pushd  /tmp/build
+tar    -xzvf  /tmp/data/cmake-3.0.2.tar.gz
+cd     cmake-3.0.2/
+./configure  --prefix=/tools/cmake/3.0.2  \
+    &&  make  &&  make  install
+popd
+
 date  >  ${HOME}/.provision.user
