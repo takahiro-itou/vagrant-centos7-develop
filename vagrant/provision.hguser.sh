@@ -33,4 +33,19 @@ command="sudo  sed -i.bak  -e '${sedCmd}'  /etc/shadow"
 echo  "Execute: ${command}"
 eval  ${command}
 
+# 公開鍵を設定
+pubKeyFile=${HOME}/.ssh/Vagrant-Hg.8192.rsa.pub
+newUserSSH=${newUserHome}/.ssh
+newUserAuth=${newUserSSH}/authorized_keys
+
+sudo  mkdir  ${newUserSSH}
+
+if test -f ${pubKeyFile} ; then
+    cat  ${pubKeyFile} | sudo tee -a  ${newUserAuth}
+fi
+
+sudo  chmod  0600  ${newUserAuth}
+sudo  chmod  0700  ${newUserSSH}
+sudo  chown  -R  ${newUser}:${newUserGroup}  ${newUserSSH}
+
 date  >  ${HOME}/.provision.hguser

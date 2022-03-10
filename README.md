@@ -22,3 +22,27 @@ cd   vagrant-ubuntu-develop
 cd   vagrant
 time vagrant destroy -f ; time vagrant up ; echo $?
 ```
+
+##  通信関連
+
+###   リポジトリ
+
+- 内部に hg のレポジトリを立てる
+
+```
+ssh  hgvagrant
+hg  init  ~/<RepoName>
+exit
+```
+
+- 仮想マシン内外からアクセス
+
+```
+hg clone  ssh://hgvagrant/<RepoName>
+```
+
+.ssh/config の設定が正しくない場合はユーザー名 hg の指定が必要になる
+
+```
+hg  clone  ssh://hg@hgvagrant/<RepoName>
+```
