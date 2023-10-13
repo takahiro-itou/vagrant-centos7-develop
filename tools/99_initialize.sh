@@ -10,12 +10,12 @@ rsync -av ~/VagrantConfig/ "${project_base_dir}/data/home/vagrant/"
 # 転送するディレクトリをアーカイブしておく
 pushd "${project_base_dir}"
 rm -f vagrant/data.tar.xz
-time tar -cJvf vagrant/data.tar.xz data/
+time  tar -cJvf vagrant/data.tar.xz data/
 popd
 
-pushd  "${vagrant_dir}"
+pushd "${vagrant_dir}"
 
-time  vagrant  destroy -f
-time  vagrant  up ; echo 0
+time  vagrant destroy -f
+time  vagrant up ; echo $?
 
 popd
