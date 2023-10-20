@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.boot_timeout = 600
   config.vm.network(:forwarded_port, guest: 22, host: 11722, id: "ssh")
-  config.vm.network("private_network", ip: "192.168.33.17")
+  config.vm.network("private_network", ip: "192.168.33.50")
 
   config.vm.provision("userfiles1", type: "file",
                       source: "data.tar.xz",
