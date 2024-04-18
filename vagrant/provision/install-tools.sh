@@ -1,5 +1,6 @@
 #!/bin/bash  -xue
 
+test  -f  "${HOME}/.provision/install-toolsr"  &&  exit 0
 
 # CPPUNIT
 mkdir  /tmp/build
@@ -19,4 +20,5 @@ cd     cmake-3.0.2/
     &&  make  &&  make  install
 popd
 
-date  >  "${HOME}/.provision.user"
+mkdir -p "${HOME}/.provision"
+date  >  "${HOME}/.provision/install-tools"
