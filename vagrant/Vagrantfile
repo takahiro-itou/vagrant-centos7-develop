@@ -24,13 +24,11 @@ load  File.expand_path('common/AttachNewhdd.rb')
 
 # Provisioning(s)
 load  File.expand_path('common/UploadFiles.rb')
+load  File.expand_path('common/SetupCentos.rb')
 load  File.expand_path('common/RamDisk.rb')
 load  File.expand_path('common/SetupUsers.rb')
 
 Vagrant.configure("2") do |config|
-  config.vm.provision("root", type: "shell",
-                      path: "provision.root.sh",
-                      privileged: true)
   config.vm.provision("install-tools", type: "shell",
                       path: "provision/install-tools.sh",
                       privileged: false)
