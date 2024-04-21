@@ -7,6 +7,7 @@ vagrant_dir="${script_dir}/../vagrant"
 project_base_dir=$(readlink -f "${script_dir}/..")
 
 env     \
+    COPY_CONFIG_DIR='yes'                        \
     PROJECT_BASE_DIR="${project_base_dir}"      \
     WORKDIR='/cygdrive/w/Vagrant'               \
     /bin/bash -xue "${vagrant_dir}/common/setup-userdata.sh"    \
