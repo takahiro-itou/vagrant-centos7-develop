@@ -5,45 +5,25 @@ load  File.expand_path("DetectOS.rb")  if File.exists?("DetectOS.rb")
 
 Vagrant.configure("2") do |config|
   config.vm.box = "takahiro-itou/centos7-develop"
-  config.vm.box_download_options = {"ssl-revoke-best-effort" => true}
 
   config.vm.provider "virtualbox" do |v|
     v.name   = "vagrant-centos7-develop"
     v.memory = "3072"
-
     v.gui    = false
-    v.customize [
-      "modifyvm",           :id,
-      "--cableconnected1",  "on",
-      "--hwvirtex",         "on",
-      "--nestedpaging",     "on",
-      "--largepages",       "on",
-      "--ioapic",           "on",
-      "--pae",              "on",
-      "--paravirtprovider", "kvm",
-    ]
   end
 
-  config.vm.boot_timeout = 600
   config.vm.network(:forwarded_port, guest: 22, host: 15022, id: "ssh")
   config.vm.network("private_network", ip: "192.168.33.50")
-
-  config.vm.provision("userfiles1", type: "file",
-                      source: "data.tar.xz",
-                      destination: "/tmp/")
-  config.vm.provision("userfiles2", type: "shell",
-                      path: "provision.data.sh",
-                      privileged: false)
-
-  config.vm.provision("root", type: "shell",
-                      path: "provision.root.sh",
-                      privileged: true)
-  config.vm.provision("user", type: "shell",
-                      path: "provision.user.sh",
-                      privileged: false)
-  config.vm.provision("hguser", type: "shell",
-                      path: "provision.hguser.sh",
-                      privileged: false)
   config.vm.synced_folder(".", "/vagrant", disabled: true)
-
 end
+
+load  File.expand_path('common/CommonCustomize.rb')
+
+$disk_image_file = File.expand_path('./disk/centos7-develop-sdb.vdi')
+load  File.expand_path('common/AttachIDEHdd.rb')
+
+# Provisioning(s)
+load  File.expand_path('common/UploadFiles.rb')
+load  File.expand_path('common/SetupCentos.rb')
+load  File.expand_path('common/RamDisk.rb')
+load  File.expand_path('common/SetupUsers.rb')
